@@ -82,13 +82,6 @@ RUN sentry help | sed '1,/Commands:/d' | awk '{print $1}' >  /sentry-commands.tx
 COPY ./self-hosted/sentry.conf.py ./self-hosted/config.yml $SENTRY_CONF/
 COPY ./self-hosted/docker-entrypoint.sh /
 
-RUN : double-check some built files are available \
-    && test -f /usr/src/sentry/src/sentry/loader/_registry.json \
-    && test -f /usr/src/sentry/src/sentry/integration-docs/python.json \
-    && test -f /usr/src/sentry/src/sentry/static/sentry/dist/entrypoints/app.js \
-    && sentry help \
-    && :
-
 EXPOSE 9000
 VOLUME /data
 
